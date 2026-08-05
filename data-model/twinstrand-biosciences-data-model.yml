@@ -1,0 +1,171 @@
+generated: '2026-08-05'
+method: derived
+source: >-
+  openapi/twinstrand-biosciences-content-openapi.yml plus the registered post types and taxonomies
+  read live from https://twinstrandbio.com/wp-json/wp/v2/types and .../taxonomies, 2026-08-05
+api: twinstrand-biosciences:content
+note: >-
+  The entity graph of the twinstrandbio.com content API. Entities are WordPress post types and
+  taxonomies as the site actually registers them; relationships are the id-reference fields and
+  _links relations each resource carries. Ids are plain integers — this API uses no prefixed or
+  typed identifiers.
+identifiers:
+  style: integer
+  prefixes: none
+  note: >-
+    Every resource is keyed by an unprefixed auto-increment integer `id`, and additionally
+    addressable by `slug` through the ?slug= collection filter. There is no UUID, no typed prefix
+    and no cross-collection id namespace, so an id alone does not tell you its type — the `type`
+    field on the resource does.
+entities:
+- name: publication
+  rest_base: publication
+  path: /wp/v2/publication
+  count_observed: 38
+  description: A peer-reviewed paper on Duplex Sequencing that TwinStrand indexes.
+  key_fields: [id, date, slug, link, title.rendered, content.rendered, featured_media, acf, meta]
+- name: publication-category
+  rest_base: publication-category
+  path: /wp/v2/publication-category
+  count_observed: 11
+  kind: taxonomy
+  description: Topical taxonomy over publications (e.g. Duplex Sequencing Technology).
+- name: publication-year
+  rest_base: publication-year
+  path: /wp/v2/publication-year
+  count_observed: 14
+  kind: taxonomy
+  description: Chronological taxonomy over publications.
+- name: patent
+  rest_base: patent
+  path: /wp/v2/patent
+  count_observed: 28
+  description: A patent record in the Duplex Sequencing estate TwinStrand publishes.
+- name: poster
+  rest_base: poster
+  path: /wp/v2/poster
+  count_observed: 14
+  description: A conference poster, typically with a PDF in the media library.
+- name: news
+  rest_base: news
+  path: /wp/v2/news
+  count_observed: 27
+  description: A company news item or press release.
+- name: event
+  rest_base: event
+  path: /wp/v2/event
+  count_observed: 30
+  description: A conference, webinar or meeting appearance.
+- name: team-member
+  rest_base: team-member
+  path: /wp/v2/team-member
+  count_observed: 10
+  description: A leadership or team profile.
+- name: page
+  rest_base: pages
+  path: /wp/v2/pages
+  count_observed: 24
+  description: A marketing, product, resource or legal page. Self-referencing through `parent`.
+- name: post
+  rest_base: posts
+  path: /wp/v2/posts
+  count_observed: 0
+  description: The blog collection. Registered but empty — there is no blog.
+- name: media
+  rest_base: media
+  path: /wp/v2/media
+  count_observed: 370
+  description: >-
+    An attachment — brochures, data sheets, poster PDFs, images. The `attachment` post type; every
+    other entity points into it through featured_media.
+- name: category
+  rest_base: categories
+  path: /wp/v2/categories
+  count_observed: 4
+  kind: taxonomy
+  description: Shared taxonomy; registered on both `post` and `team-member`.
+- name: tag
+  rest_base: tags
+  path: /wp/v2/tags
+  count_observed: 0
+  kind: taxonomy
+  description: Registered on `post` only. Empty.
+- name: user
+  rest_base: users
+  path: /wp/v2/users
+  count_observed: 1
+  description: An author with published content. Exactly one is exposed.
+relationships:
+- from: publication
+  to: publication-category
+  type: has_many
+  via: publication-category (array of term ids); filterable as ?publication-category=
+- from: publication
+  to: publication-year
+  type: has_many
+  via: publication-year (array of term ids); filterable as ?publication-year=
+- from: publication
+  to: media
+  type: has_one
+  via: featured_media (integer id, 0 when unset); _links["wp:featuredmedia"]
+- from: patent
+  to: media
+  type: has_one
+  via: featured_media
+- from: poster
+  to: media
+  type: has_one
+  via: featured_media
+- from: news
+  to: media
+  type: has_one
+  via: featured_media
+- from: event
+  to: media
+  type: has_one
+  via: featured_media
+- from: team-member
+  to: media
+  type: has_one
+  via: featured_media
+- from: team-member
+  to: category
+  type: has_many
+  via: categories (array of term ids) — the `category` taxonomy is registered on team-member
+- from: page
+  to: page
+  type: belongs_to
+  via: parent (integer id, 0 at the top level) — the page hierarchy
+- from: page
+  to: media
+  type: has_one
+  via: featured_media
+- from: post
+  to: category
+  type: has_many
+  via: categories
+- from: post
+  to: tag
+  type: has_many
+  via: tags
+- from: post
+  to: user
+  type: belongs_to
+  via: author (integer id); _links.author
+- from: media
+  to: page
+  type: belongs_to
+  via: post (integer id of the attaching resource, when set)
+- from: publication-category
+  to: publication-category
+  type: belongs_to
+  via: parent — hierarchical taxonomy
+traversal:
+  embed: >-
+    Add ?_embed to any resource to inline author, wp:featuredmedia and wp:term into an `_embedded`
+    object in one request instead of walking the relationships above.
+  links: >-
+    Every resource carries a HAL-style `_links` object with self, collection, about,
+    wp:featuredmedia, wp:term and curies relations.
+render: null
+render_note: No subway/ diagram exists for this repo yet.

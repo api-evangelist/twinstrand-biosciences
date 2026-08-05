@@ -1,0 +1,84 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — TwinStrand Biosciences Content API
+  version: 1.0.0
+  x-provenance:
+    generated: '2026-08-05'
+    method: generated
+    source: openapi/twinstrand-biosciences-content-openapi.yml
+    note: >-
+      Captures the enhancements API Evangelist adds on top of the derived OpenAPI, so the base
+      document stays a faithful projection of https://twinstrandbio.com/wp-json/ and our editorial
+      layer stays separable. The base document is never mutated.
+extends: ../openapi/twinstrand-biosciences-content-openapi.yml
+actions:
+- target: $.info
+  description: Mark the document as third-party derived and stamp the source of truth.
+  update:
+    x-api-evangelist:
+      profile: https://apis.io/provider/twinstrand-biosciences/
+      derived_by: API Evangelist enrichment pipeline (local-v1)
+      provider_published_spec: false
+      source_of_truth: https://twinstrandbio.com/wp-json/
+      caveat: >-
+        TwinStrand Biosciences publishes no OpenAPI and no developer program. This document
+        describes the WordPress CMS content API behind twinstrandbio.com, not a TwinStrand product
+        API. The DuplexSeq analysis pipeline is customer-only software on the DNAnexus platform and
+        is out of scope.
+
+- target: $.info
+  description: Record the classification of this surface.
+  update:
+    x-surface-class: cms-content-api
+    x-product-api: false
+
+- target: $.paths['/wp/v2/publication'].get
+  description: Flag the publication index as the marquee dataset on this surface.
+  update:
+    x-marquee: true
+    x-dataset:
+      name: TwinStrand publication index
+      items: 38
+      taxonomies: [publication-category, publication-year]
+      note: >-
+        The peer-reviewed literature on Duplex Sequencing, filterable by topic and year. The most
+        useful thing an agent can do with twinstrandbio.com.
+
+- target: $.paths['/wp/v2/patent'].get
+  description: Flag the patent estate, which is unusual as a public JSON collection.
+  update:
+    x-marquee: true
+    x-dataset:
+      name: Duplex Sequencing patent estate
+      items: 28
+      note: >-
+        Patent numbers exposed as slugs and titles. Material given the 2024 Guardant Health
+        infringement verdict on the University of Washington Duplex Sequencing patents.
+
+- target: $.components.responses.NotFound
+  description: Escalate the HTML-404 finding so generators surface it.
+  update:
+    x-client-warning: >-
+      Unknown ids and unregistered routes return text/html, not the WordPress JSON error envelope.
+      Generated clients MUST branch on Content-Type before parsing.
+
+- target: $.components.securitySchemes.applicationPassword
+  description: Note that no operation in this document needs it.
+  update:
+    x-required-for: [write, 'context=edit']
+    x-anonymous-read: true
+
+- target: $
+  description: Attach the cross-artifact index so one document points at the whole profile.
+  update:
+    x-artifacts:
+      conventions: conventions/twinstrand-biosciences-conventions.yml
+      errors: errors/twinstrand-biosciences-problem-types.yml
+      data_model: data-model/twinstrand-biosciences-data-model.yml
+      examples: examples/twinstrand-biosciences-examples.yml
+      authentication: authentication/twinstrand-biosciences-authentication.yml
+      lifecycle: lifecycle/twinstrand-biosciences-lifecycle.yml
+      conformance: conformance/twinstrand-biosciences-conformance.yml
+      well_known: well-known/twinstrand-biosciences-well-known.yml
+      packages: packages/twinstrand-biosciences-packages.yml
+      skills: skills/_index.yml

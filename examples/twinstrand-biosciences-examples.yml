@@ -1,0 +1,128 @@
+generated: '2026-08-05'
+method: probed
+source: live anonymous GETs against https://twinstrandbio.com/wp-json/wp/v2, 2026-08-05
+api: twinstrand-biosciences:content
+note: >-
+  Every request and response below was executed against the live host without credentials and the
+  payloads are captured verbatim (trimmed with ?_fields= where noted, never edited). Nothing here
+  is synthesized.
+examples:
+- name: List publications, newest first
+  operationId: listPublication
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/publication?per_page=1&_fields=id,date,slug,link,title,publication-category,publication-year,acf,type'
+  status: 200
+  response_headers:
+    x-wp-total: '38'
+    x-wp-totalpages: '38'
+    link: '<https://twinstrandbio.com/wp-json/wp/v2/publication?per_page=1&page=2>; rel="next"'
+  response:
+  - id: 9739
+    date: '2026-07-22T12:57:33'
+    slug: chemically-induced-skin-tumors-arise-from-long-lived-stem-cells-of-the-upper-hair-follicle
+    type: publication
+    link: https://twinstrandbio.com/publication/chemically-induced-skin-tumors-arise-from-long-lived-stem-cells-of-the-upper-hair-follicle/
+    title:
+      rendered: Chemically induced skin tumors arise from long-lived stem cells of the upper hair follicle
+    publication-category: [19]
+    publication-year: [66]
+    acf: []
+
+- name: The publication topical taxonomy, with term counts
+  operationId: listPublicationCategory
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/publication-category?per_page=100&_fields=id,name,slug,count'
+  status: 200
+  response:
+  - {id: 59, count: 1, name: AML MRD, slug: aml-mrd-oncology}
+  - {id: 58, count: 1, name: Carcinogenesis, slug: carcinogenesis-genomic-toxicology}
+  - {id: 21, count: 8, name: Custom, slug: custom}
+  - {id: 22, count: 5, name: Duplex Sequencing Technology, slug: duplex-sequencing-technology}
+  - {id: 9, count: 6, name: Featured, slug: featured}
+  - {id: 63, count: 1, name: Gene Therapy, slug: gene-therapy}
+  - {id: 19, count: 23, name: Genomic Toxicology, slug: genomic-toxicology}
+  - {id: 60, count: 4, name: Hematological Malignancy, slug: hematological-malignancy}
+  - {id: 57, count: 21, name: Mutagenesis, slug: mutagenesis-genomic-toxicology}
+  - {id: 20, count: 6, name: Oncology, slug: oncology}
+  - {id: 62, count: 3, name: TP53, slug: tp53-custom}
+  note: >-
+    Term id 19 (Genomic Toxicology) is the category on the sampled publication above — the join is
+    ?publication-category=19 back on /wp/v2/publication.
+
+- name: List patents
+  operationId: listPatent
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/patent?per_page=2&_fields=id,date,slug,link,title'
+  status: 200
+  response_headers:
+    x-wp-total: '28'
+  response:
+  - id: 6416
+    date: '2024-02-08T16:01:01'
+    slug: '3601598'
+    link: https://twinstrandbio.com/patent/3601598/
+    title: {rendered: '3601598'}
+  - id: 6413
+    date: '2024-02-08T16:00:24'
+    slug: '6975507'
+    link: https://twinstrandbio.com/patent/6975507/
+    title: {rendered: '6975507'}
+  note: The patent `title` is the raw patent number; the slug mirrors it.
+
+- name: Site-wide search
+  operationId: search
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/search?search=duplex&per_page=3'
+  status: 200
+  response:
+  - id: 9555
+    title: TwinStrand Biosciences Initiates Regulatory Approval Process for Duplex Sequencing Mutagenesis Assays with OECD
+    url: https://twinstrandbio.com/news/twinstrand-biosciences-initiates-regulatory-approval-process-for-duplex-sequencing-mutagenesis-assays-with-oecd/
+    type: post
+    subtype: news
+  - id: 9250
+    title: TwinStrand Biosciences and Exact Sciences Announce Exclusive License Agreement for Duplex Sequencing Technology
+    url: https://twinstrandbio.com/news/twinstrand-biosciences-and-exact-sciences-announce-exclusive-license-agreement-for-duplex-sequencing-technology/
+    type: post
+    subtype: news
+  - id: 7983
+    title: An Updated Duplex Sequencing Mutagenesis Assay Accurately and Reproducibly Detects Mutation Frequencies Below One-In-Ten-Million
+    url: https://twinstrandbio.com/poster/an-updated-duplex-sequencing-mutagenesis-assay-accurately-and-reproducibly-detects-mutation-frequencies-below-one-in-ten-million/
+    type: post
+    subtype: poster
+  note: >-
+    `subtype` carries the real collection (news, poster, publication, patent, event, team-member,
+    page); `_links.self.href` on each hit is the direct collection URL to follow. The `type` field
+    is always "post" for post-type results and is not the thing to branch on.
+
+- name: Latest news release
+  operationId: listNews
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/news?per_page=1&orderby=date&order=desc&_fields=title,date,link'
+  status: 200
+  response_headers:
+    x-wp-total: '27'
+  response:
+  - date: '2026-02-26'
+    title: {rendered: TwinStrand Biosciences Initiates Regulatory Approval Process for Duplex Sequencing Mutagenesis Assays with OECD}
+    link: https://twinstrandbio.com/news/twinstrand-biosciences-initiates-regulatory-approval-process-for-duplex-sequencing-mutagenesis-assays-with-oecd/
+
+error_examples:
+- name: per_page above the documented bound
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/publication?per_page=999'
+  status: 400
+  content_type: application/json
+  response:
+    code: rest_invalid_param
+    message: 'Invalid parameter(s): per_page'
+    data:
+      status: 400
+      params: {per_page: per_page must be between 1 (inclusive) and 100 (inclusive)}
+- name: privileged route, anonymous
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/settings'
+  status: 401
+  content_type: application/json
+  response: {code: rest_forbidden, message: Sorry, you are not allowed to do that., data: {status: 401}}
+- name: unknown id — answered as HTML, not JSON
+  request: 'GET https://twinstrandbio.com/wp-json/wp/v2/publication/999999'
+  status: 404
+  content_type: text/html
+  response: '<!doctype html> ... <title>404 Not Found</title> ...'
+  note: >-
+    The edge intercepts unknown ids and routes before WordPress. This is the single most important
+    client behaviour on this API — see errors/twinstrand-biosciences-problem-types.yml.

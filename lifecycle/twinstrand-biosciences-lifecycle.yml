@@ -1,0 +1,97 @@
+generated: '2026-08-05'
+method: probed
+source: https://twinstrandbio.com/wp-json/ + live probes 2026-08-05
+api: twinstrand-biosciences:content
+versioning:
+  scheme: uri-path-namespace
+  current: wp/v2
+  docs: null
+  note: >-
+    Version is carried by the WordPress REST namespace segment. TwinStrand does not version an API
+    of its own — the namespace version tracks WordPress core (site reports WordPress 7.0.2).
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    No deprecation or sunset policy is published, no RFC 8594 Sunset/Deprecation header was
+    observed on any probed response, and no operation in the derived OpenAPI is marked deprecated.
+    No Deprecation pointer wired.
+sla:
+  url: null
+  uptime_target: null
+  note: No SLA, uptime commitment or support tier is published for any surface.
+status_page:
+  url: null
+  probed:
+  - {url: 'https://status.twinstrandbio.com/', result: DNS does not resolve (NXDOMAIN)}
+  - {url: 'https://twinstrandbio.com/status/', result: 404}
+  note: >-
+    No status page exists on any TwinStrand host. No StatusPage pointer wired — asserting one
+    would be fabrication.
+changelog:
+  url: null
+  probed:
+  - {url: 'https://twinstrandbio.com/changelog/', result: 404}
+  - {url: 'https://twinstrandbio.com/company/news/', result: '200 — corporate newsroom (27 releases), not an API changelog'}
+  note: >-
+    TwinStrand publishes no changelog or release notes for any API or for the DuplexSeq software.
+    The newsroom is wired as News, not ChangeLog. No ChangeLog pointer wired.
+support:
+  contact_page: null
+  developer_support: null
+  probed:
+  - {url: 'https://twinstrandbio.com/contact/', result: 404}
+  - {url: 'https://twinstrandbio.com/careers/', result: '404 (redirects to ?page_id=7644, which also 404s)'}
+  note: >-
+    There is no standalone contact page in the site sitemap and no developer support channel,
+    forum, community, Slack/Discord or issue tracker for any API. Contact happens through
+    HubSpot forms embedded in product pages. No Support pointer wired.
+blog:
+  url: null
+  note: >-
+    The `post` collection is registered but empty (X-WP-Total: 0) and https://twinstrandbio.com/feed/
+    returns 200 with zero <item> elements. There is no blog. The per-post-type feed at
+    /company/news/feed/ returns 403. No Blog or BlogRSS pointer wired.
+developer_surface_probes:
+  note: >-
+    Probed 2026-08-05 for any developer-facing surface. TwinStrand publishes none: no developer
+    portal, no documentation site, no API reference, no quickstart, no API pricing and no API
+    sign-up. api., docs., developer., developers., support., portal. and app.twinstrandbio.com all
+    fail to resolve. No pointer was wired for any of these — the pages do not exist.
+  postman:
+    wired: false
+    finding: No public Postman workspace or collection attributable to TwinStrand Biosciences was found.
+product_lifecycle:
+  note: >-
+    Not an API lifecycle, but material to anyone reading this profile: the commercial surface has
+    moved. Recorded from TwinStrand's own newsroom.
+  events:
+  - date: '2024-02-14'
+    event: >-
+      A federal jury found Guardant Health willfully infringed the University of Washington Duplex
+      Sequencing patents exclusively licensed to TwinStrand, awarding $83.4M in damages.
+    source: https://twinstrandbio.com/company/news/
+  - date: '2024-07-31'
+    event: >-
+      TwinStrand Biosciences and Exact Sciences announced an exclusive license agreement for the
+      Duplex Sequencing technology.
+    source: https://twinstrandbio.com/news/twinstrand-biosciences-and-exact-sciences-announce-exclusive-license-agreement-for-duplex-sequencing-technology/
+  - date: '2026-02-26'
+    event: >-
+      TwinStrand initiated the regulatory approval process for its Duplex Sequencing Mutagenesis
+      Assays with the OECD. Most recent newsroom entry as of this pass.
+    source: https://twinstrandbio.com/news/twinstrand-biosciences-initiates-regulatory-approval-process-for-duplex-sequencing-mutagenesis-assays-with-oecd/
+  - date: observed 2026-08-05
+    event: >-
+      The DuplexSeq Mutagenesis Assay is now owned and operated by Scantox — twinstrandbio.com's
+      own mutagenesis pages link out to
+      https://scantox.com/twinstrand-mutagenesis-assay/ (200, redirects to the Scantox
+      DuplexSeq Mutagenesis Assays service page). Any future machine-readable surface for that
+      assay will belong to Scantox, not TwinStrand.
+hosting:
+  server: nginx
+  cdn_or_edge: >-
+    An edge layer in front of WordPress intercepts unknown /wp-json paths and returns a generic
+    HTML 404 (see errors/twinstrand-biosciences-problem-types.yml).
+  platform: WordPress 7.0.2 with Elementor 4.0.9

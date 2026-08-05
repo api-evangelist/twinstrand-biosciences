@@ -1,0 +1,82 @@
+generated: '2026-08-05'
+method: derived
+source: >-
+  openapi/twinstrand-biosciences-content-openapi.yml plus live error responses observed on
+  twinstrandbio.com, 2026-08-05
+api: twinstrand-biosciences:content
+format: wordpress-rest
+rfc9457: false
+media_type: application/json
+envelope:
+  shape: '{"code": "<machine string>", "message": "<human string>", "data": {"status": <int>, "params": {...}, "details": {...}}}'
+  note: >-
+    This is the WordPress core REST error envelope, not RFC 9457 problem+json. There is no `type`
+    URI, no `title`/`detail` split and no `instance`. TwinStrand publishes no error reference, so
+    every entry below was observed live rather than read from documentation.
+edge_interception:
+  finding: >-
+    An unknown resource id or an unregistered route does NOT return the WordPress
+    `rest_no_route` / `rest_post_invalid_id` JSON envelope. It is intercepted before WordPress and
+    answered with a generic HTML 404 page (content-type text/html, title "404 Not Found"). A client
+    that assumes JSON on every REST response will fail to parse the most common error case.
+  verified:
+  - {request: 'GET /wp-json/wp/v2/publication/999999', status: 404, content_type: text/html}
+  - {request: 'GET /wp-json/wp/v2/nope', status: 404, content_type: text/html}
+problem_types:
+- code: rest_invalid_param
+  status: 400
+  title: Invalid query parameter
+  detail: >-
+    One or more query parameters failed the JSON Schema bounds declared in the route args.
+    `data.params` names the offending parameter and `data.details` carries the per-parameter code.
+  observed: 'GET /wp-json/wp/v2/publication?per_page=999'
+  observed_body: '{"code":"rest_invalid_param","message":"Invalid parameter(s): per_page","data":{"status":400,"params":{"per_page":"per_page must be between 1 (inclusive) and 100 (inclusive)"},"details":{"per_page":{"code":"rest_out_of_bounds","message":"per_page must be between 1 (inclusive) and 100 (inclusive)","data":null}}}}'
+  remediation: >-
+    Clamp to the bounds in the derived OpenAPI — per_page is 1..100 with a default of 10; page is
+    >= 1. Do not retry unchanged.
+  retryable: false
+- code: rest_out_of_bounds
+  status: 400
+  title: Parameter out of bounds
+  detail: The nested per-parameter code inside data.details of a rest_invalid_param response.
+  remediation: See rest_invalid_param.
+  retryable: false
+- code: rest_forbidden
+  status: 401
+  title: Authentication required
+  detail: >-
+    The route or context requires an authenticated user. Returned for privileged reads as well as
+    writes — the message is deliberately generic and does not distinguish "not authenticated" from
+    "authenticated but not permitted".
+  observed:
+  - 'GET /wp-json/wp/v2/settings'
+  - 'GET /wp-json/wp-abilities/v1/abilities'
+  observed_body: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+  remediation: >-
+    Authenticate with a WordPress Application Password over HTTP Basic
+    (https://twinstrandbio.com/wp-admin/authorize-application.php). Every operation in the derived
+    OpenAPI is anonymously readable, so a rest_forbidden on those paths means you asked for
+    `context=edit` rather than that credentials are missing.
+  retryable: false
+- code: html-404
+  status: 404
+  title: Not found (HTML, not JSON)
+  detail: >-
+    Unknown ids and unregistered routes are answered by the edge with an HTML 404 page rather than
+    a WordPress JSON error. Recorded as a distinct type because it breaks JSON-only clients.
+  observed: 'GET /wp-json/wp/v2/publication/999999'
+  remediation: >-
+    Branch on Content-Type, not on status alone. Treat a text/html body on any /wp-json path as a
+    not-found and do not attempt to parse it.
+  retryable: false
+not_observed:
+- code: rest_no_route
+  note: >-
+    The standard WordPress "no route was found matching the URL and request method" error was
+    never returned — the edge 404 pre-empts it. Listed so a later round does not assume it.
+- status: 429
+  note: >-
+    No rate-limit response was triggered across the probing done for this pass, and no
+    X-RateLimit-* or Retry-After header was ever observed. Absence of evidence, not a guarantee.
+- status: 5xx
+  note: No server error was observed on any probe.

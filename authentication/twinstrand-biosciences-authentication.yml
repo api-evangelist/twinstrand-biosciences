@@ -1,0 +1,16 @@
+generated: '2026-08-05'
+method: derived
+source: openapi/twinstrand-biosciences-content-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: applicationPassword
+  type: http
+  scheme: basic
+  description: WordPress Application Passwords over HTTP Basic, advertised in the discovery
+    document at authentication.application-passwords.endpoints.authorization = https://twinstrandbio.com/wp-admin/authorize-application.php.
+    Required only for write operations and privileged reads; every operation in this document
+    is anonymously readable.
+  sources:
+  - openapi/twinstrand-biosciences-content-openapi.yml

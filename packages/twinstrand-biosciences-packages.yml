@@ -1,0 +1,51 @@
+generated: '2026-08-05'
+method: searched
+source: https://github.com/twinstrandbio
+note: >-
+  TwinStrand Biosciences ships no API client library or SDK — it publishes no product API to
+  wrap. Registries probed 2026-08-05 with no first-party hit for "twinstrand", "twinstrandbio"
+  or "duplexseq": npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist, crates.io.
+  The DuplexSeq analysis pipeline is delivered as cloud software on the DNAnexus platform, not as
+  an installable package. The github.com/twinstrandbio organization holds exactly one public
+  repository (reference data, not code); a second organization, github.com/twinstrandbio-analytics
+  ("Computational analysis projects at TwinStrand"), exists but has zero public repositories.
+  Third-party packages named "duplexseq" on GitHub (dbsloan/duplexseq, jfnavarro/duplexseq,
+  sudmantlab/DuplexSequencingPipeline, the makovalab-psu duplex-sequencing repos) are academic
+  reimplementations of the published method and are NOT TwinStrand artifacts — they are recorded
+  here only so a later round does not mistake them for first-party.
+sdk_count: 0
+api_clients: 0
+registries_probed:
+- {registry: npm, query: 'twinstrand / twinstrandbio / duplexseq', hits: 0}
+- {registry: pypi, query: 'twinstrand / twinstrandbio / duplexseq', hits: 0}
+- {registry: maven-central, hits: 0}
+- {registry: nuget, hits: 0}
+- {registry: pkg.go.dev, hits: 0}
+- {registry: rubygems, hits: 0}
+- {registry: packagist, hits: 0}
+- {registry: crates.io, hits: 0}
+packages:
+- language: n/a
+  registry: github
+  name: twinstrandbio-reference-data
+  url: https://github.com/twinstrandbio/twinstrandbio-reference-data
+  install: git clone https://github.com/twinstrandbio/twinstrandbio-reference-data
+  official: true
+  api_client: false
+  license: BSD-3-Clause-Clear
+  last_push: '2023-06-06'
+  description: >-
+    The only public repository in the TwinStrand Biosciences GitHub organization. It publishes
+    reference data for the DuplexSeq assays — an `interval-sets` directory of genomic target
+    regions — under a BSD 3-Clause Clear license. It is data, not a client library, and is not
+    distributed through any package registry.
+organizations:
+- url: https://github.com/twinstrandbio
+  name: TwinStrand Biosciences
+  created: '2016-07-18'
+  public_repos: 1
+- url: https://github.com/twinstrandbio-analytics
+  name: TwinStrand Biosciences Analytics
+  created: '2021-01-13'
+  public_repos: 0
+  note: Organization exists and is claimed by TwinStrand, but publishes nothing.

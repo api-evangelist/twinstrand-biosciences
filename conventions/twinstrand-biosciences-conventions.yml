@@ -1,0 +1,145 @@
+generated: '2026-08-05'
+method: derived
+source: >-
+  openapi/twinstrand-biosciences-content-openapi.yml (derived from https://twinstrandbio.com/wp-json/)
+  plus live response headers observed on GET /wp/v2/news and GET /wp/v2/publication, 2026-08-05
+api: twinstrand-biosciences:content
+authentication:
+  anonymous_read: true
+  scheme: WordPress Application Passwords over HTTP Basic
+  authorization_endpoint: https://twinstrandbio.com/wp-admin/authorize-application.php
+  browser_scheme: logged-in cookie + X-WP-Nonce header
+  cors:
+    access_control_allow_headers: [Authorization, X-WP-Nonce, Content-Disposition, Content-MD5, Content-Type]
+    access_control_expose_headers: [X-WP-Total, X-WP-TotalPages, Link]
+    vary: Origin
+  artifact: authentication/twinstrand-biosciences-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No idempotency key header or parameter is exposed on any of the 349 routes in the discovery
+    document, and none is documented. No Idempotency pointer is wired in apis.yml — TwinStrand has
+    no idempotency contract to advertise, and asserting one would be fabrication. (Every operation
+    in the derived OpenAPI is a GET and therefore idempotent by HTTP semantics, which is not the
+    same thing as an idempotency-key contract.)
+pagination:
+  style: page-number
+  request_params:
+  - {name: page, type: integer, default: 1, minimum: 1}
+  - {name: per_page, type: integer, default: 10, minimum: 1, maximum: 100}
+  - {name: offset, type: integer, note: available on collection routes}
+  response_headers:
+  - {name: X-WP-Total, meaning: total items in the collection}
+  - {name: X-WP-TotalPages, meaning: total pages at the current per_page}
+  link_header: 'RFC 8288 Link header with rel="next" / rel="prev"'
+  observed: 'GET /wp/v2/news?per_page=2 -> X-WP-Total: 27, X-WP-TotalPages: 14, Link: <...page=2>; rel="next"'
+  collection_sizes_observed:
+    publication: 38
+    event: 30
+    patent: 28
+    news: 27
+    poster: 14
+    'publication-year': 14
+    'publication-category': 11
+    'team-member': 10
+    pages: 24
+    media: 370
+    categories: 4
+    users: 1
+    posts: 0
+    tags: 0
+field_selection:
+  sparse_fields:
+    param: _fields
+    note: comma-separated list of top-level fields to return
+  expansion:
+    param: _embed
+    note: >-
+      Inlines linked resources (author, wp:featuredmedia, wp:term, replies) into _embedded, driven
+      by the _links relations each resource carries.
+  context:
+    param: context
+    values: [view, embed, edit]
+    default: view
+    note: edit context requires authentication and returns 401 rest_forbidden anonymously
+ordering_and_filtering:
+  params: [search, search_columns, search_semantics, order, orderby, slug, status, after, before,
+    modified_after, modified_before, include, exclude, offset, tax_relation]
+  custom_taxonomy_filters:
+  - 'publication-category / publication-category_exclude (on /wp/v2/publication)'
+  - 'publication-year / publication-year_exclude (on /wp/v2/publication)'
+  - 'categories / categories_exclude, tags / tags_exclude (on /wp/v2/posts)'
+  note: taken verbatim from the route args in the discovery document
+metadata:
+  field: meta
+  note: >-
+    Registered post meta. Every resource also returns an `acf` field (Advanced Custom Fields);
+    observed as an empty array on the sampled publication resource.
+request_tracing:
+  request_id_header: null
+  note: >-
+    No request-id or correlation header is emitted on any probed response. The only non-standard
+    response headers are the WordPress pagination trio.
+versioning:
+  scheme: uri-path-namespace
+  current: wp/v2
+  namespaces_present:
+  - wp/v2
+  - wp-site-health/v1
+  - wp-block-editor/v1
+  - wp-abilities/v1
+  - oembed/1.0
+  - yoast/v1
+  - facetwp/v1
+  - cky/v1
+  - psd/v1
+  - post-smtp/v1
+  - post-smtp/v2
+  - elementor/v1
+  - elementor/v1/documents
+  - elementor/v1/feedback
+  - elementor-one/v1
+  - elementor-ai/v1
+  - elementor-pro/v1
+  - elementor-hello-elementor/v1
+  artifact: lifecycle/twinstrand-biosciences-lifecycle.yml
+error_envelope:
+  format: wordpress-rest
+  rfc9457: false
+  shape: '{"code": "<string>", "message": "<human string>", "data": {"status": <int>}}'
+  observed: '{"code":"rest_forbidden","message":"Sorry, you are not allowed to do that.","data":{"status":401}}'
+  caveat: >-
+    Unknown ids and unregistered routes are answered by the edge as an HTML 404 page, NOT as JSON.
+    Branch on Content-Type, not on status alone.
+  artifact: errors/twinstrand-biosciences-problem-types.yml
+rate_limiting:
+  documented: false
+  headers_observed: []
+  note: >-
+    No X-RateLimit-* or Retry-After header was observed on any anonymous GET, and no rate-limit
+    policy is published. robots.txt sets no Crawl-delay and disallows nothing.
+caching:
+  headers_observed: ['vary: Accept-Encoding', 'vary: Origin']
+  etag: false
+  cache_control: not present on the probed JSON responses
+  note: >-
+    'x-robots-tag: noindex' is set on /wp-json responses — the API is served to clients but kept
+    out of search indexes. 'x-content-type-options: nosniff' and
+    'strict-transport-security: max-age=31536000' are present.
+agent_surface:
+  wp_abilities:
+    namespace: wp-abilities/v1
+    routes: [/abilities, '/abilities/{name}', '/abilities/{name}/run', /categories, '/categories/{slug}']
+    anonymous_status: 401
+    note: >-
+      The WordPress Abilities API is installed. It is the nearest thing on this host to an
+      agent-tool manifest, but anonymous enumeration is refused, so no tool list, input schema or
+      crosswalk could be produced. No MCP namespace is registered.
+  mcp: none
+  a2a: none
+cross_links:
+  errors: errors/twinstrand-biosciences-problem-types.yml
+  lifecycle: lifecycle/twinstrand-biosciences-lifecycle.yml
+  authentication: authentication/twinstrand-biosciences-authentication.yml
+  conformance: conformance/twinstrand-biosciences-conformance.yml
+  data_model: data-model/twinstrand-biosciences-data-model.yml
