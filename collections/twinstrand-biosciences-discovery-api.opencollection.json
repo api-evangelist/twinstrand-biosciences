@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TwinStrand Biosciences Content API (WordPress REST wp/v2) Discovery API",
+    "version": "wp/v2"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discovery",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Namespace route index",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://twinstrandbio.com/wp-json/wp/v2",
+            "params": [
+              {
+                "name": "context",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Route index for the wp/v2 namespace."
+        },
+        {
+          "info": {
+            "name": "List taxonomy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://twinstrandbio.com/wp-json/wp/v2/taxonomies",
+            "params": [
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Scope under which the request is made; determines fields present in response."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Limit results to taxonomies associated with a specific post type."
+              }
+            ]
+          },
+          "docs": "List every registered taxonomy and its rest_base."
+        },
+        {
+          "info": {
+            "name": "List type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://twinstrandbio.com/wp-json/wp/v2/types",
+            "params": [
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Scope under which the request is made; determines fields present in response."
+              }
+            ]
+          },
+          "docs": "List every registered post type and its rest_base - the content model of the site."
+        },
+        {
+          "info": {
+            "name": "List status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://twinstrandbio.com/wp-json/wp/v2/statuses",
+            "params": [
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Scope under which the request is made; determines fields present in response."
+              }
+            ]
+          },
+          "docs": "List the publication statuses visible to the caller."
+        },
+        {
+          "info": {
+            "name": "oEmbed representation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://twinstrandbio.com/wp-json/oembed/1.0/embed",
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "maxwidth",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The URL of the resource for which to fetch oEmbed data."
+              }
+            ]
+          },
+          "docs": "oEmbed 1.0 representation of any twinstrandbio.com URL."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

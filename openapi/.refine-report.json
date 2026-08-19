@@ -1,0 +1,50 @@
+{
+  "provider": "twinstrand-biosciences",
+  "sources": [
+    "twinstrand-biosciences-discovery-api-openapi.yml",
+    "twinstrand-biosciences-events-api-openapi.yml",
+    "twinstrand-biosciences-media-api-openapi.yml",
+    "twinstrand-biosciences-news-api-openapi.yml",
+    "twinstrand-biosciences-pages-api-openapi.yml",
+    "twinstrand-biosciences-patents-api-openapi.yml",
+    "twinstrand-biosciences-people-api-openapi.yml",
+    "twinstrand-biosciences-posters-api-openapi.yml",
+    "twinstrand-biosciences-posts-api-openapi.yml",
+    "twinstrand-biosciences-publications-api-openapi.yml",
+    "twinstrand-biosciences-search-api-openapi.yml",
+    "twinstrand-biosciences-taxonomies-api-openapi.yml"
+  ],
+  "outputs": [
+    "twinstrand-biosciences-discovery-api-openapi.yml",
+    "twinstrand-biosciences-events-api-openapi.yml",
+    "twinstrand-biosciences-media-api-openapi.yml",
+    "twinstrand-biosciences-news-api-openapi.yml",
+    "twinstrand-biosciences-pages-api-openapi.yml",
+    "twinstrand-biosciences-patents-api-openapi.yml",
+    "twinstrand-biosciences-people-api-openapi.yml",
+    "twinstrand-biosciences-posters-api-openapi.yml",
+    "twinstrand-biosciences-posts-api-openapi.yml",
+    "twinstrand-biosciences-publications-api-openapi.yml",
+    "twinstrand-biosciences-search-api-openapi.yml",
+    "twinstrand-biosciences-taxonomies-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "twinstrand-biosciences-discovery-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-events-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-media-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-news-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-pages-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-patents-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-people-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-posters-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-posts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-publications-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "twinstrand-biosciences-taxonomies-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

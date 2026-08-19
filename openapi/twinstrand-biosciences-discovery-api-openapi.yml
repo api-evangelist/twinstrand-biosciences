@@ -1,0 +1,323 @@
+openapi: 3.2.0
+info:
+  title: TwinStrand Biosciences Content API (WordPress REST wp/v2) Discovery API
+  version: wp/v2
+  summary: The anonymously readable content API behind twinstrandbio.com.
+  description: 'DERIVED BY API EVANGELIST - NOT PUBLISHED BY TWINSTRAND BIOSCIENCES.
+
+
+    TwinStrand Biosciences publishes no product or developer API. This document was derived mechanically from the live WordPress REST route-discovery document at https://twinstrandbio.com/wp-json/ (349 routes across 18 namespaces, retrieved 2026-08-05), and covers only the subset that is anonymously readable and carries company content: publications, patents, posters, news, events, team members, pages, media, taxonomies and site search.
+
+
+    Every path, parameter, default and bound below is taken verbatim from that discovery document. Write methods (POST/PUT/PATCH/DELETE) are registered on most of these routes but require authentication and are deliberately omitted - this profile documents the public read surface only.
+
+
+    The TwinStrand DuplexSeq analysis pipeline runs as cloud software hosted on the DNAnexus platform and is reachable only by customers with a DNAnexus project; it is not part of this contract.'
+  contact:
+    name: TwinStrand Biosciences
+    url: https://twinstrandbio.com/
+  license:
+    name: Content (c) TwinStrand Biosciences, Inc. - all rights reserved
+    url: https://twinstrandbio.com/legal/
+  x-provenance:
+    generated: '2026-08-05'
+    method: derived
+    source: https://twinstrandbio.com/wp-json/
+    derived_by: API Evangelist enrichment pipeline (local-v1)
+    note: TwinStrand publishes no OpenAPI. Nothing here was invented; the route document is saved verbatim at openapi/_source/twinstrand-biosciences-wp-json-root.json.
+servers:
+- url: https://twinstrandbio.com/wp-json
+  description: Production
+tags:
+- name: Discovery
+paths:
+  /wp/v2:
+    get:
+      operationId: getNamespaceIndex
+      summary: Namespace route index
+      description: Route index for the wp/v2 namespace.
+      tags:
+      - Discovery
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          default: view
+      - name: namespace
+        in: query
+        required: false
+        schema:
+          default: wp/v2
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/InvalidParam'
+        '401':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wp/v2/taxonomies:
+    get:
+      operationId: listTaxonomies
+      summary: List taxonomy
+      description: List every registered taxonomy and its rest_base.
+      tags:
+      - Discovery
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Limit results to taxonomies associated with a specific post type.
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/InvalidParam'
+        '401':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wp/v2/types:
+    get:
+      operationId: listTypes
+      summary: List type
+      description: List every registered post type and its rest_base - the content model of the site.
+      tags:
+      - Discovery
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/InvalidParam'
+        '401':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /wp/v2/statuses:
+    get:
+      operationId: listStatuses
+      summary: List status
+      description: List the publication statuses visible to the caller.
+      tags:
+      - Discovery
+      parameters:
+      - name: context
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - view
+          - embed
+          - edit
+          default: view
+        description: Scope under which the request is made; determines fields present in response.
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          $ref: '#/components/responses/InvalidParam'
+        '401':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /oembed/1.0/embed:
+    get:
+      operationId: getOembed
+      summary: oEmbed representation
+      description: oEmbed 1.0 representation of any twinstrandbio.com URL.
+      tags:
+      - Discovery
+      parameters:
+      - name: format
+        in: query
+        required: false
+        schema:
+          default: json
+      - name: maxwidth
+        in: query
+        required: false
+        schema:
+          default: 600
+      - name: url
+        in: query
+        required: true
+        schema:
+          type: string
+          format: uri
+        description: The URL of the resource for which to fetch oEmbed data.
+      responses:
+        '200':
+          description: Success.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
+        '400':
+          $ref: '#/components/responses/InvalidParam'
+        '401':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: 'Resource or route not found. NOTE: on twinstrandbio.com an unknown id or route is intercepted at the edge and answered with an HTML 404 page (text/html), not the WordPress rest_no_route JSON envelope - verified 2026-08-05 on GET /wp/v2/publication/999999 and GET /wp/v2/nope.'
+      content:
+        text/html:
+          schema:
+            type: string
+    Forbidden:
+      description: Authentication required for this context or route.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: rest_forbidden
+            message: Sorry, you are not allowed to do that.
+            data:
+              status: 401
+    InvalidParam:
+      description: 'Invalid query parameter (observed: per_page above the 100 bound).'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            code: rest_invalid_param
+            message: 'Invalid parameter(s): per_page'
+            data:
+              status: 400
+              params:
+                per_page: per_page must be between 1 (inclusive) and 100 (inclusive)
+  schemas:
+    Resource:
+      type: object
+      description: A WordPress REST resource. The exact field set varies by post type; the fields below are those observed on anonymous GETs.
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+          format: date-time
+        date_gmt:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        slug:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        link:
+          type: string
+          format: uri
+        title:
+          type: object
+          properties:
+            rendered:
+              type: string
+        content:
+          type: object
+          properties:
+            rendered:
+              type: string
+            protected:
+              type: boolean
+        excerpt:
+          type: object
+          properties:
+            rendered:
+              type: string
+            protected:
+              type: boolean
+        featured_media:
+          type: integer
+        meta:
+          type: object
+        acf:
+          type:
+          - object
+          - array
+          description: Advanced Custom Fields payload; observed empty on the sampled publication resource.
+        _links:
+          type: object
+          description: HAL-style link relations (self, collection, about, wp:featuredmedia, wp:term, curies).
+    Error:
+      type: object
+      description: The WordPress REST error envelope. This is NOT RFC 9457 application/problem+json.
+      required:
+      - code
+      - message
+      - data
+      properties:
+        code:
+          type: string
+          examples:
+          - rest_invalid_param
+          - rest_forbidden
+        message:
+          type: string
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+            params:
+              type: object
+            details:
+              type: object
+  securitySchemes:
+    applicationPassword:
+      type: http
+      scheme: basic
+      description: WordPress Application Passwords over HTTP Basic, advertised in the discovery document at authentication.application-passwords.endpoints.authorization = https://twinstrandbio.com/wp-admin/authorize-application.php. Required only for write operations and privileged reads; every operation in this document is anonymously readable.
