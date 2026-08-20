@@ -35,6 +35,19 @@ tags:
 - Biotechnology
 - Life Sciences
 - DNA Sequencing
+- Next-Generation Sequencing
+- Oncology
+- Genetic Toxicology
+- Diagnostics
+- Bioinformatics
+- Research
+- Content
+tags_raw:
+- Company
+- Genomics
+- Biotechnology
+- Life Sciences
+- DNA Sequencing
 - Next Generation Sequencing
 - Oncology
 - Genetic Toxicology
@@ -65,6 +78,8 @@ apis:
   humanURL: https://twinstrandbio.com/publications/
   baseURL: https://twinstrandbio.com/wp-json/wp/v2
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -225,6 +240,8 @@ apis:
   humanURL: https://twinstrandbio.com/publications/
   baseURL: https://twinstrandbio.com/wp-json/wp/v2
   tags:
+  - taxonomies
+  tags_raw:
   - Taxonomies
   properties:
   - type: OpenAPI
