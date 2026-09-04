@@ -37,6 +37,19 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source:
+  - authentication
+  - security
+  generated: '2026-09-03'
+  method: derived
 image: https://twinstrandbio.com/wp-content/uploads/2023/05/TwinStrand-Favicon-1-300x300.png
 specificationVersion: '0.23'
 created: '2026-08-05'
