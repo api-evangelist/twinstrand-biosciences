@@ -1,18 +1,9 @@
 openapi: 3.2.0
 info:
-  title: TwinStrand Biosciences Content API (WordPress REST wp/v2) Pages API
+  title: TwinStrand Biosciences Content API (WordPress REST wp/v2)…
   version: wp/v2
   summary: The anonymously readable content API behind twinstrandbio.com.
-  description: 'DERIVED BY API EVANGELIST - NOT PUBLISHED BY TWINSTRAND BIOSCIENCES.
-
-
-    TwinStrand Biosciences publishes no product or developer API. This document was derived mechanically from the live WordPress REST route-discovery document at https://twinstrandbio.com/wp-json/ (349 routes across 18 namespaces, retrieved 2026-08-05), and covers only the subset that is anonymously readable and carries company content: publications, patents, posters, news, events, team members, pages, media, taxonomies and site search.
-
-
-    Every path, parameter, default and bound below is taken verbatim from that discovery document. Write methods (POST/PUT/PATCH/DELETE) are registered on most of these routes but require authentication and are deliberately omitted - this profile documents the public read surface only.
-
-
-    The TwinStrand DuplexSeq analysis pipeline runs as cloud software hosted on the DNAnexus platform and is reachable only by customers with a DNAnexus project; it is not part of this contract.'
+  description: DERIVED BY API EVANGELIST - NOT PUBLISHED BY TWINSTRAND BIOSCIENCES.
   contact:
     name: TwinStrand Biosciences
     url: https://twinstrandbio.com/
@@ -323,12 +314,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: 'Resource or route not found. NOTE: on twinstrandbio.com an unknown id or route is intercepted at the edge and answered with an HTML 404 page (text/html), not the WordPress rest_no_route JSON envelope - verified 2026-08-05 on GET /wp/v2/publication/999999 and GET /wp/v2/nope.'
-      content:
-        text/html:
-          schema:
-            type: string
     Forbidden:
       description: Authentication required for this context or route.
       content:
@@ -340,6 +325,12 @@ components:
             message: Sorry, you are not allowed to do that.
             data:
               status: 401
+    NotFound:
+      description: 'Resource or route not found. NOTE: on twinstrandbio.com an unknown id or route is intercepted at the edge and answered with an HTML 404 page (text/html), not the WordPress rest_no_route JSON envelope - verified 2026-08-05 on GET /wp/v2/publication/999999 and GET /wp/v2/nope.'
+      content:
+        text/html:
+          schema:
+            type: string
     InvalidParam:
       description: 'Invalid query parameter (observed: per_page above the 100 bound).'
       content:
