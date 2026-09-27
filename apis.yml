@@ -81,202 +81,20 @@ tags_raw:
 - Research
 - Content
 apis:
-- aid: twinstrand-biosciences:twinstrand-biosciences-discovery-api
-  name: TwinStrand Biosciences Discovery API
-  description: The Discovery API from TwinStrand Biosciences — 5 operation(s) for discovery.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
+- aid: twinstrand-biosciences:twinstrandbio-com-website-wordpress-rest
+  name: TwinStrand Biosciences Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the TwinStrand Biosciences website at twinstrandbio.com:
+    the route index of the site''s content management system, catalogued as one site surface rather than
+    as separate APIs.'
+  baseURL: https://twinstrandbio.com/wp-json
   tags:
-  - Discovery
+  - WordPress
+  x-surface: platform-generated
   properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-discovery-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-events-api
-  name: TwinStrand Biosciences Events API
-  description: The Events API from TwinStrand Biosciences — 2 operation(s) for events.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Event
-  tags_raw:
-  - Events
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-events-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-media-api
-  name: TwinStrand Biosciences Media API
-  description: The Media API from TwinStrand Biosciences — 2 operation(s) for media.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Media
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-media-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-news-api
-  name: TwinStrand Biosciences News API
-  description: The News API from TwinStrand Biosciences — 2 operation(s) for news.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - News
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-news-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-pages-api
-  name: TwinStrand Biosciences Pages API
-  description: The Pages API from TwinStrand Biosciences — 2 operation(s) for pages.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Pages
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-pages-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-patents-api
-  name: TwinStrand Biosciences Patents API
-  description: The Patents API from TwinStrand Biosciences — 2 operation(s) for patents.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Patents
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-patents-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-people-api
-  name: TwinStrand Biosciences People API
-  description: The People API from TwinStrand Biosciences — 4 operation(s) for people.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - People
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-people-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-posters-api
-  name: TwinStrand Biosciences Posters API
-  description: The Posters API from TwinStrand Biosciences — 2 operation(s) for posters.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Posters
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-posters-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-posts-api
-  name: TwinStrand Biosciences Posts API
-  description: The Posts API from TwinStrand Biosciences — 2 operation(s) for posts.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Posts
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-posts-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-publications-api
-  name: TwinStrand Biosciences Publications API
-  description: The Publications API from TwinStrand Biosciences — 6 operation(s) for publications.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Publications
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-publications-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-search-api
-  name: TwinStrand Biosciences Search API
-  description: The Search API from TwinStrand Biosciences — 1 operation(s) for search.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - Search
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-search-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
-- aid: twinstrand-biosciences:twinstrand-biosciences-taxonomies-api
-  name: TwinStrand Biosciences Taxonomies API
-  description: The Taxonomies API from TwinStrand Biosciences — 4 operation(s) for taxonomies.
-  humanURL: https://twinstrandbio.com/publications/
-  baseURL: https://twinstrandbio.com/wp-json/wp/v2
-  tags:
-  - taxonomies
-  tags_raw:
-  - Taxonomies
-  properties:
-  - type: OpenAPI
-    url: openapi/twinstrand-biosciences-taxonomies-api-openapi.yml
-  - type: DataModel
-    url: data-model/twinstrand-biosciences-data-model.yml
-  - type: ErrorCatalog
-    url: errors/twinstrand-biosciences-problem-types.yml
-  - type: Examples
-    url: examples/twinstrand-biosciences-examples.yml
+  - type: Documentation
+    url: https://twinstrandbio.com/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 x-enrichment:
   date: '2026-08-05'
   status: enriched
@@ -338,3 +156,7 @@ common:
   url: security/twinstrand-biosciences-domain-security.yml
 - type: AgentSkill
   url: skills/_index.yml
+- type: DataModel
+  url: data-model/twinstrand-biosciences-data-model.yml
+- type: ErrorCatalog
+  url: errors/twinstrand-biosciences-problem-types.yml
