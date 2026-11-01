@@ -64,5 +64,110 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-TwinStrand Biosciences is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://forgeglobal.com/twinstrand-biosciences_stock/
+TwinStrand Biosciences is a Seattle, Washington genomics company founded in 2015 by Jesse Salk and Michael Schmitt that develops and commercializes Duplex Sequencing, an error-corrected next-generation-sequencing chemistry licensed from the University of Washington that independently tracks both strands of an individual DNA molecule and compares them, cutting sequencing error rates from roughly 1-in-100 to below 1-in-10,000,000 per nucleotide and making ultra-rare mutations detectable. The company sells DuplexSeq assay kits — a Mutagenesis Assay for genetic toxicology in human, rat and mouse models, an AML MRD Assay for minimal residual disease in acute myeloid leukemia, and a customizable assay — each paired with a proprietary cloud analysis pipeline that turns raw Illumina reads into duplex-consensus sequences, variant calls, mutation frequency, SBS spectra and assay quality metrics. That analysis software is not a public API: it is hosted on the DNAnexus platform and reachable only by customers through a DNAnexus project. TwinStrand publishes no developer portal, no API reference and no OpenAPI, AsyncAPI, GraphQL or Postman artifact of its own, and the api., docs. and developer. subdomains of twinstrandbio.com do not resolve. The only machine-readable surface on twinstrandbio.com is the WordPress REST API at /wp-json — 349 routes across 18 namespaces — whose wp/v2 content collections are anonymously readable and serve the company publication index, patent estate, conference posters, news releases, events, team profiles, pages and media library as JSON. Its public code lives in the github.com/twinstrandbio organization, which holds a single reference-data repository and no client libraries. The DuplexSeq Mutagenesis Assay business has since been transferred to Scantox, and Exact Sciences holds an exclusive license to the Duplex Sequencing technology.
+
+**Areas:** Company · Genomics · Biotechnology · Life Sciences · DNA Sequencing · Next-Generation Sequencing · Oncology · Genetic Toxicology · Diagnostics · Bioinformatics · Research · Content
+
+## TwinStrand Biosciences on APIs.io
+
+Everything profiled for TwinStrand Biosciences is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/twinstrand-biosciences/](https://apis.io/providers/twinstrand-biosciences/)** — or go straight to one of the APIs or properties below.
+
+### APIs (1)
+
+- [TwinStrand Biosciences Website (WordPress REST)](https://apis.io/apis/twinstrand-biosciences/twinstrandbio-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the TwinStrand Biosciences website at twinstrandbio.com: the route index of the site's content management system,…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-discovery-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-events-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-media-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-news-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-pages-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-patents-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-people-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-posters-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-posts-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-publications-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-search-api/)
+- [Moved to /providers/twinstrand-biosciences/](https://apis.io/collections/twinstrand-biosciences/open-twinstrand-biosciences-taxonomies-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Twinstrand Biosciences Content Overlay](https://apis.io/overlays/twinstrand-biosciences/twinstrand-biosciences-content-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Twinstrand Biosciences Authentication](https://apis.io/security/twinstrand-biosciences/twinstrand-biosciences-authentication/)
+- [Twinstrand Biosciences Domain Security](https://apis.io/security/twinstrand-biosciences/twinstrand-biosciences-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://twinstrandbio.com/)
+- [Terms of service](https://twinstrandbio.com/legal/product-and-services-terms-and-conditions/)
+- [Privacy policy](https://twinstrandbio.com/legal/privacy-policy/)
+- [GitHub](https://github.com/twinstrandbio)
+
+## API Evangelist rating
+
+**Kin Score 16.6** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 58.0 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 23.2 |
+| Access clarity | 21.1 |
+
+**Agent readiness 4.1** — human-only
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 19.5** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/twinstrand-biosciences/](https://apis.io/providers/twinstrand-biosciences/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for TwinStrand Biosciences: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/twinstrand-biosciences/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
